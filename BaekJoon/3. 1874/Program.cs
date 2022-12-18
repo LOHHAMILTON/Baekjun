@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Markup;
 
 namespace ConsoleApp1
 {
@@ -6,33 +7,33 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string[] inputs1 = Console.ReadLine().Split();
-            int N = int.Parse(inputs1[0]);
-            int M = int.Parse(inputs1[1]);
-            int[] array = new int[N];
-            string[] inputs2 = Console.ReadLine().Split();
-            int max = int.MinValue;
-            for (int i = 0; i < N; i++)
+            Stack<int> values = new();
+            var times = int.Parse(Console.ReadLine());
+            int a = 0;
+            int b = 0;
+
+            for(int i = 0; i < times; i++)
             {
-                array[i] = int.Parse(inputs2[i]);
-            }
-            int temp;
-            for (int i = 0; i < N - 2; i++)
-            {
-                for (int j = i + 1; j < N - 1; j++)
+                var input = int.Parse(Console.ReadLine());
+
+                if(b < input)
                 {
-                    for (int k = j + 1; k < N; k++)
+                    for (int j = b; j < input; j++)
                     {
-                        temp = array[i] + array[j] + array[k];
-                        if (temp <= M)
-                        {
-                            max = Math.Max(max, temp);
-                        }
+                        values.Push(b + 1);
+                        Console.WriteLine("+");
+                        b++; 
                     }
+                }
+
+                if(b > input)
+                {
+                    values.Pop();
+                    Console.WriteLine("-");
                 }
             }
 
-            Console.WriteLine(max);
+            Console.ReadLine();
         }
     }
 }
