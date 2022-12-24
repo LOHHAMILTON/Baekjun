@@ -1,39 +1,46 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Windows.Markup;
 
-namespace ConsoleApp1
+internal class program
 {
-    public class 블랙잭
+    static StreamReader rd = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+    //new BufferedStream(Console.OpenStandardInput()) stream?
+    static StreamWriter wr = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        List<int> list = new List<int>();
+        int number = 0;
+        Stack<int> stack = new Stack<int>();
+
+        StringBuilder sb = new StringBuilder();
+        int a = int.Parse(rd.ReadLine());
+        for (int i = 0; i < a; i++)
         {
-            Stack<int> values = new();
-            var times = int.Parse(Console.ReadLine());
-            int a = 0;
-            int b = 0;
-
-            for(int i = 0; i < times; i++)
-            {
-                var input = int.Parse(Console.ReadLine());
-
-                if(b < input)
-                {
-                    for (int j = b; j < input; j++)
-                    {
-                        values.Push(b + 1);
-                        Console.WriteLine("+");
-                        b++; 
-                    }
-                }
-
-                if(b > input)
-                {
-                    values.Pop();
-                    Console.WriteLine("-");
-                }
-            }
-
-            Console.ReadLine();
+            list.Add(int.Parse(rd.ReadLine()));
         }
+        for (int i = 1; i <= a; i++)
+        {
+            stack.Push(i);
+            sb.Append("+" + "\n");
+
+            while (stack.Count != 0 && stack.Peek() == list[number])
+            {
+                stack.Pop();
+                sb.Append("-" + "\n");
+                number++;
+            }
+        }
+        if (stack.Count == 0)
+        {
+            wr.WriteLine(sb);
+        }
+        else
+        {
+            wr.WriteLine("NO");
+        }
+        wr.Close();
     }
+
 }
