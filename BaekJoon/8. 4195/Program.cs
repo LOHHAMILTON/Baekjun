@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System;
-
-class program
+﻿class program
 {
     static StreamReader rd = new StreamReader(Console.OpenStandardInput());
     static StreamWriter wr = new StreamWriter(Console.OpenStandardOutput());
